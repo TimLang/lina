@@ -44,7 +44,8 @@ app.directive('jsonSchema', [ 'RecursionHelper', function(RecursionHelper){
   return {
     restrict: 'E',
   scope: {
-    schema: '='
+    schema: '=',
+    schemaType: '@schemaType'
   },
   controller: ['$scope', function($scope){
     $scope.isRequired = function(params, name){
@@ -63,6 +64,9 @@ app.directive('jsonSchema', [ 'RecursionHelper', function(RecursionHelper){
       return info || '-';
     }
 
+    $scope.isKeyParamsStr = function() {
+      return $scope.schemaType === 'parametersTitle';
+    }
     $scope.isOneOf = function(){
       return !! $scope.schema.oneOf;
     }
