@@ -63,8 +63,6 @@
 	  <tbody>
 	    <tr ng-repeat='(key, value) in schema.properties'>
 	      <td><span>{{ key }}
-	        <span class="label label-primary" ng-show='isRequired(schema, key)'>must</span>
-	        <span class="label label-default" ng-hide='isRequired(schema, key)'>optional</span>
 	      </td>
 	      <td>{{ value.type }}</td>
 	      <td class='more-info' ng-if='hasMoreInfo(value)'>{{ moreInfo(value) }}</td>
