@@ -122,7 +122,7 @@ app.directive('jsonSchema', [ 'RecursionHelper', function(RecursionHelper){
     return RecursionHelper.compile(element);
   },
   //templateUrl 无法跨域原因不明，只能使用相同域的schema.html
-  templateUrl: '<%= asset_path("templates/lina/schema.html", host: (Rails.env.production? ? Setting[:domain] : nil) rescue nil) %>'
+  templateUrl: '<%= asset_path("templates/lina/schema.html", host: ((Rails.env.production? ? Setting[:domain] : nil) rescue nil)) %>'
   };
 
 }])
