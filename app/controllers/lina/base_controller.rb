@@ -2,6 +2,10 @@ module Lina
   class BaseController < ActionController::Base
     layout 'lina/application'
 
+    include Concerns::LinaAuthConcern
+
+    before_filter :lina_custom_auth
+
     private
 
     # 取得用户使用的所有 API 控制器
