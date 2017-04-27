@@ -39,8 +39,7 @@ module Lina
         @@action_methods = begin
                              methods = (api_actions + public_instance_methods(true) -
                                         internal_methods +
-                                        public_instance_methods(false)).uniq.map { |x| x.to_s } -
-                             hidden_actions.to_a
+                                        public_instance_methods(false)).uniq.map { |x| x.to_s }
                              Set.new(methods.reject { |method| method =~ /_one_time_conditions/ })
                            end
       end

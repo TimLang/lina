@@ -1,3 +1,4 @@
+
 require_dependency 'lina/base_controller'
 
 module Lina
@@ -10,7 +11,7 @@ module Lina
       api_routes = []
       @user_api_controllers = user_api_controllers
       @user_api_controllers.each do |controller|
-        api_routes += inspector.send(:filter_routes, controller)
+        api_routes += inspector.send(:filter_routes, normalize_filter(controller))
       end
 
       @routes = inspector.send(:collect_routes, api_routes)
@@ -26,6 +27,16 @@ module Lina
       respond_to do |format|
         format.html
         format.json { render json: @tree }
+      end
+    end
+
+    private
+
+    def normalize_filter(filter)
+      if filter.is_a?(Hash) && filter[:controller]
+        { controller: /#{filter[:controller].downcase.sub(/_?controller\z/, '').sub('::', '/')}/ }
+      elsif filter
+        { controller: /#{filter}/, action: /#{filter}/, verb: /#{filter}/, name: /#{filter}/, path: /#{filter}/ }
       end
     end
   end
